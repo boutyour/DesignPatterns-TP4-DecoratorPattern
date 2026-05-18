@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions xmlns="http://www.netbeans.org/ns/maven-actions/1">
+    <action>
+        <actionName>run</actionName>
+        <packagings>
+            <packaging>jar</packaging>
+        </packagings>
+        <goals>
+            <goal>process-classes</goal>
+            <goal>org.codehaus.mojo:exec-maven-plugin:3.5.1:exec</goal>
+        </goals>
+        <properties>
+            <exec.mainClass>ma.ensias.ecommerce.tp4.Main</exec.mainClass>
+            <exec.executable>java</exec.executable>
+            <exec.vmArgs>-Dfile.encoding=windows-1252 -Dsun.stdout.encoding=utf-8 -Dsun.stderr.encoding=windows-1252</exec.vmArgs>
+            <exec.appArgs></exec.appArgs>
+            <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
+        </properties>
+    </action>
+</actions>

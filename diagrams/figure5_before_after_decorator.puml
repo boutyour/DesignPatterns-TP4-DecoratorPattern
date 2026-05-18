@@ -1,0 +1,37 @@
+@startuml
+title Avant / après : déplacer les responsabilités transverses
+
+skinparam shadowing false
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+
+package "Avant : adaptateurs surchargés" {
+  class PaypalAdapterAvant {
+    +pay()
+    --
+    logging
+    frais
+    antiFraude
+    cashback
+  }
+}
+
+package "Après : décorateurs composables" {
+  interface PaymentGateway
+  class PaypalAdapter
+  abstract class PaymentGatewayDecorator
+  class LoggingPaymentDecorator
+  class ServiceFeePaymentDecorator
+  class FraudCheckPaymentDecorator
+  class CashbackPaymentDecorator
+
+  PaymentGateway <|.. PaypalAdapter
+  PaymentGateway <|.. PaymentGatewayDecorator
+  PaymentGatewayDecorator o-- PaymentGateway : décore
+  PaymentGatewayDecorator <|-- LoggingPaymentDecorator
+  PaymentGatewayDecorator <|-- ServiceFeePaymentDecorator
+  PaymentGatewayDecorator <|-- FraudCheckPaymentDecorator
+  PaymentGatewayDecorator <|-- CashbackPaymentDecorator
+}
+
+@enduml

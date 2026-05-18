@@ -1,0 +1,20 @@
+@startuml
+title Pipeline TP4 : créer, décorer, choisir, payer
+
+start
+:Main prépare le CheckoutContext;
+:CheckoutApplication.processCheckout(context);
+:createGateways()\ncrée le catalogue de base;
+:decorateGateway(gateway)\najoute les décorateurs;
+:CheckoutService.checkout(context, gateways);
+:Strategy.selectGateway(context, gateways);
+if (Passerelle compatible ?) then (oui)
+  :PaymentGateway.pay(context);
+  :Les décorateurs entourent\nl'appel réel;
+  :Retourner PaymentResult;
+else (non)
+  :Retourner un échec\naucune passerelle compatible;
+endif
+stop
+
+@enduml

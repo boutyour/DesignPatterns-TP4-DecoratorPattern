@@ -1,0 +1,25 @@
+@startuml
+title TP4 - Problème sans Décorateur
+
+skinparam classAttributeIconSize 0
+
+interface PaymentGateway
+class PaypalAdapter
+class BankTransferAdapter
+class MobileWalletAdapter
+
+PaymentGateway <|.. PaypalAdapter
+PaymentGateway <|.. BankTransferAdapter
+PaymentGateway <|.. MobileWalletAdapter
+
+note right of PaypalAdapter
+  Si on ajoute ici :
+  - logging
+  - frais
+  - anti-fraude
+  - cashback
+  la classe grossit et duplique
+  des responsabilités transverses.
+end note
+
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+title TP4 - Séquence de paiement avec Décorateur
+
+actor Client
+participant Main
+participant "CheckoutApplication" as App
+participant CheckoutService
+participant "LoggingDecorator" as Log
+participant "ServiceFeeDecorator" as Fee
+participant "PaymentGateway concret" as Gateway
+
+Client -> Main : lancer scénario
+Main -> App : processCheckout(context)
+App -> App : createGateways()
+App -> App : decorateGateway(gateway)
+App -> CheckoutService : checkout(context, decoratedGateways)
+CheckoutService -> Log : pay(context)
+Log -> Fee : pay(context)
+Fee -> Gateway : pay(context)
+Gateway --> Fee : PaymentResult
+Fee --> Log : PaymentResult enrichi
+Log --> CheckoutService : PaymentResult
+
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+title Progression du fil conducteur TP1 -> TP4
+
+skinparam shadowing false
+skinparam rectangle {
+  BackgroundColor #F8F8F8
+  BorderColor #444444
+}
+
+left to right direction
+
+rectangle "TP1\nAdapter\n\nUnifier les APIs externes\nsous PaymentGateway" as TP1
+rectangle "TP2\nStrategy\n\nChoisir une passerelle\nselon une politique métier" as TP2
+rectangle "TP3\nFactory Method\n\nCréer le catalogue\nde passerelles par boutique" as TP3
+rectangle "TP4\nDecorator\n\nEnrichir une passerelle\nsans modifier l'adaptateur" as TP4
+
+TP1 --> TP2 : passerelles compatibles
+TP2 --> TP3 : choix réutilisé
+TP3 --> TP4 : passerelles créées
+
+@enduml

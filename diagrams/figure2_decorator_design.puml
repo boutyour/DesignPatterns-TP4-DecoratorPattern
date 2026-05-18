@@ -1,0 +1,28 @@
+@startuml
+title TP4 - Conception avec Décorateur
+
+skinparam classAttributeIconSize 0
+
+interface PaymentGateway
+class PaypalAdapter
+class BankTransferAdapter
+class MobileWalletAdapter
+abstract class PaymentGatewayDecorator
+class LoggingPaymentDecorator
+class ServiceFeePaymentDecorator
+class FraudCheckPaymentDecorator
+class CashbackPaymentDecorator
+class RetryPaymentDecorator
+
+PaymentGateway <|.. PaypalAdapter
+PaymentGateway <|.. BankTransferAdapter
+PaymentGateway <|.. MobileWalletAdapter
+PaymentGateway <|.. PaymentGatewayDecorator
+PaymentGatewayDecorator o-- PaymentGateway : décore
+PaymentGatewayDecorator <|-- LoggingPaymentDecorator
+PaymentGatewayDecorator <|-- ServiceFeePaymentDecorator
+PaymentGatewayDecorator <|-- FraudCheckPaymentDecorator
+PaymentGatewayDecorator <|-- CashbackPaymentDecorator
+PaymentGatewayDecorator <|-- RetryPaymentDecorator
+
+@enduml

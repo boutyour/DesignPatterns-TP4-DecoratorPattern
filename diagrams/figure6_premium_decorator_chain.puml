@@ -1,0 +1,21 @@
+@startuml
+title Chaîne de décorateurs - Boutique Premium
+
+skinparam shadowing false
+
+object "LoggingPaymentDecorator" as Log
+object "CashbackPaymentDecorator" as Cash
+object "FraudCheckPaymentDecorator" as Fraud
+object "ServiceFeePaymentDecorator" as Fee
+object "PaymentGateway concret" as Gateway
+
+Log --> Cash : décore
+Cash --> Fraud : décore
+Fraud --> Fee : décore
+Fee --> Gateway : décore
+
+note bottom
+  La chaîne reste manipulable comme un PaymentGateway.
+end note
+
+@enduml
